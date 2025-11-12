@@ -54,7 +54,7 @@ def main():
     
      # 2️⃣ Choix du mode : nouveau patient ou existant
     # --------------------------------------------------------
-    choix = st.sidebar.selectbox("Sélectionnez une option :", ["🆕 Nouveau Patient", "📂 Patient existant"])
+    choix = st.sidebar.selectbox("*NAVIGATION* :", ["🆕 Nouveau Patient", "📂 Patient existant"])
     colonnes=st.sidebar.columns(2)
     colonnes[1].subheader("🧩  du patient")
     colonnes[0].subheader("Caractéristiques")
