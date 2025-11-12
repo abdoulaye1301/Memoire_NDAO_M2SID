@@ -54,10 +54,10 @@ def main():
     
      # 2️⃣ Choix du mode : nouveau patient ou existant
     # --------------------------------------------------------
-    choix = st.sidebar.selectbox("*NAVIGATION* :", ["🆕 Nouveau Patient", "📂 Patient existant"])
+    choix = st.sidebar.selectbox("**NAVIGATION** :", ["🆕 Nouveau Patient", "📂 Patient existant"])
     colonnes=st.sidebar.columns(2)
-    colonnes[1].subheader("🧩  du patient")
-    colonnes[0].subheader("Caractéristiques")
+    colonnes[1].subheader("🧩  **du patient**")
+    colonnes[0].subheader("**Caractéristiques**")
     if choix== "📂 Patient existant":
 
         df_final.sort_values(by='N° Patient', ascending=False,inplace=True)
