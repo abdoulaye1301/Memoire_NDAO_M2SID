@@ -6,7 +6,5 @@ scikit-learn
 matplotlib
 seaborn
 scipy
-lifelines
 Pillow
-scikit-survival
 shap
