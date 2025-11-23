@@ -110,6 +110,8 @@ def main():
     colonnes[0].subheader("**Caractéristiques**")
     
     if choix== "📂 Patient existant":
+        colonnes[0].text("   ")
+        colonnes[1].text("   ")
         # ... (Logique pour patient existant)
         df_final.sort_values(by='N° Patient', ascending=False,inplace=True)
         numPatient=st.sidebar.selectbox("N° Patient", df_final['N° Patient'].unique())
@@ -120,11 +122,51 @@ def main():
         donnee_entre = donneePatient[FEATURE_COLUMNS].astype(int)
         
         # Affichage des valeurs dans la sidebar (pour des raisons de concision, j'ai omis le code d'affichage des colonnes)
-        for i, feature in enumerate(FEATURE_COLUMNS):
-            val = donnee_entre[feature].values[0]
-            display_val = "OUI" if val == 1 else "NON"
-            # Affichage dans la sidebar (utilisation simplifiée)
-            st.sidebar.write(f"**{feature}** : {display_val}")
+        colonn=st.sidebar.columns(2)
+        colonn[0].text("   ")
+        colonn[1].text("   ")
+        val = donnee_entre["Cardiopathie"].values[0]
+        display_val = "OUI" if val == 1 else "NON"
+        # Affichage dans la sidebar (utilisation simplifiée)
+        colonn[0].write(f"**Cardiopathie** : {display_val}")
+        val = donnee_entre["Tabac"].values[0]
+        display_val = "OUI" if val == 1 else "NON"
+        colonn[1].write(f"**Tabac** : {display_val}")
+        colonn[0].text("   ")
+
+        val = donnee_entre["Denitrution"].values[0]
+        display_val = "OUI" if val == 1 else "NON"
+        colonn[0].write(f"**Denitrution** : {display_val}")
+        colonn[1].text("   ")
+        colonn[0].text("   ")
+        val = donnee_entre["Aspect Infiltrant"].values[0]
+        display_val = "OUI" if val == 1 else "NON"
+        colonn[1].write(f"**Aspect Infiltrant** : {display_val}")
+        colonn[1].text("   ")
+        colonn[0].text("   ")
+        val = donnee_entre["Cardiopathie 1"].values[0]
+        display_val = "OUI" if val == 1 else "NON"
+        colonn[0].write(f"**Cardiopathie 1** : {display_val}")
+        colonn[1].text("   ")
+        colonn[0].text("   ")
+        val = donnee_entre["Métastases Hépatiques"].values[0]
+        display_val = "OUI" if val == 1 else "NON"
+        colonn[1].write(f"**Métastases** : {display_val}")
+        colonn[1].text("   ")
+        colonn[0].text("   ")
+        val = donnee_entre["Adénopathies"].values[0]
+        display_val = "OUI" if val == 1 else "NON"
+        colonn[0].write(f"**Adénopathies** : {display_val}")
+        colonn[1].text("   ")
+        colonn[0].text("   ")
+        val = donnee_entre["Ulcère gastrique"].values[0]
+        display_val = "OUI" if val == 1 else "NON"
+        colonn[1].write(f"**Ulcère gastrique** : {display_val}")
+        colonn[0].text("   ")
+        val = donnee_entre["Ulcero-bourgeonnant"].values[0]
+        display_val = "OUI" if val == 1 else "NON"
+        st.sidebar.write(f"**Ulcero-bourgeonnant** : {display_val}")
+
             
     elif choix== "🆕 Nouveau Patient":
         
