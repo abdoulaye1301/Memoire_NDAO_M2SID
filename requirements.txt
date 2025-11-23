@@ -8,3 +8,4 @@ seaborn
 scipy
 Pillow
 shap
+base64

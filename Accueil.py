@@ -6,6 +6,7 @@ import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 import shap
+import base64
 #from SSVM import ssvm
 #from RSF import rsf
 #from sklearn.preprocessing import OrdinalEncoder
@@ -16,6 +17,32 @@ import numpy as np
 # from PIL import Image
 
 st.set_page_config(page_title="Mémoire NDAO", page_icon="🧠", layout="centered")
+
+# Arriere-plan Streamlit
+def add_bg_from_local(image_file):
+    with open(image_file, "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read()).decode()
+    return encoded_string
+carac=add_bg_from_local("so-615aff8466a4bdd504491f92-ph0.jpg")
+arrier_plan=add_bg_from_local("clinique42_cancerestomac_endoscopie.jpg")
+
+st.markdown(
+f"""
+<style>
+[data-testid="stAppViewContainer"] {{
+    background-image: url("data:image/jpg;base64,{arrier_plan}");
+    background-size: cover;
+}}
+[data-testid="stSidebar"] > div:first-child {{
+    background-image: url("data:image/jpg;base64,{carac}");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}}
+</style>
+""",
+unsafe_allow_html=True
+)
 
 @st.cache_data
 def chargement():
@@ -39,9 +66,19 @@ def main():
         'Adénopathies', 'Ulcère gastrique', 'Aspect Infiltrant', 
         'Cardiopathie', 'Cardiopathie 1'
     ]
-    st.title(
-        "Prédiction de la survie des patients atteints de cancer de l'estomac"
+    #st.title(
+     #   "Prédiction de la survie des patients atteints de cancer de l'estomac",
+      #  anchor="center"
+    #)
+    st.markdown(
+    """
+    <h1 style='text-align: center; color: blue;'>
+        Prédiction de la survie des patients atteints de cancer de l'estomac
+    </h1>
+    """,
+    unsafe_allow_html=True
     )
+
     st.text("   ")
     st.text("   ")
     try:
@@ -167,9 +204,32 @@ def main():
         else: 
             proba = proba_array[pred]
 
-        st.subheader("🩺 Résultat de la prédiction")
-        st.write(f"**Classe prédite :** {'🟥 Deces (à risque)' if pred==1 else '🟩 Vivant (non à risque)'}")
-        st.write(f"**Probabilité de Deces :** {proba*100:.2f}%")
+        #st.subheader("🩺 Résultat de la prédiction")
+        st.markdown(
+            """
+            <h2 style='text-align: center; color: black;'>
+                🩺 Résultat de la prédiction
+            </h2>
+            """,
+            unsafe_allow_html=True
+        )
+
+        st.markdown(
+            f"""
+            <h4 style='color: black;'>
+                Classe prédite : {'🟥 Deces (à risque)' if pred==1 else '🟩 Vivant (non à risque)'}
+            </h4>
+            """,
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            f"""
+            <h4 style='color: black;'>
+                Probabilité de Deces : {proba*100:.2f}%
+            </h4>
+            """,
+            unsafe_allow_html=True
+        )
 
         # ============================================================
         # 🎯 CORRECTION CRITIQUE DES VALEURS SHAP
@@ -200,7 +260,7 @@ def main():
 
         # 5️⃣ Extraction des valeurs SHAP pour la classe 1 (Décès)
         shap_class1 = shap_values[0, :, 1]  # attention : shap_values a la forme (nsamples, n_features, n_classes)
-        feature_names = X_train.columns
+        feature_names = donnee_entre.columns
 
         # -----------------------
         # Tableau SHAP
@@ -217,17 +277,58 @@ def main():
         # -----------------------
         # Tri des features par importance absolue
 
-        #fig, ax = plt.subplots(figsize=(8,5))
-        #colors = shap_table['Valeur SHAP'].apply(lambda x: 'red' if x > 0 else 'green')
-        #ax.barh(shap_table["Variables"], shap_table["Valeur SHAP"], color=colors)
+        # Création du tableau SHAP
+        shap_table = pd.DataFrame({
+            "Variables": feature_names,
+            "Valeur SHAP": shap_class1
+        }).sort_values(by="Valeur SHAP", ascending=False)  # ascending=True pour que la plus grande soit en haut après inversion
+
+        #st.subheader("Importance des variables selon les valeurs SHAP")
+        st.markdown(
+            """
+            <h3 style='text-align: center; color: black;'>
+                Importance des variables selon les valeurs SHAP
+            </h3>
+            """,
+            unsafe_allow_html=True
+        )
+
+        fig, ax = plt.subplots(figsize=(8, 5))
+        colors = shap_table['Valeur SHAP'].apply(lambda x: 'red' if x > 0 else 'green')
+
+        # Bar plot horizontal
+        bars = ax.barh(shap_table["Variables"], shap_table["Valeur SHAP"], color=colors)
+
+        # Étiquettes de valeurs sur les barres
+        for bar in bars:
+            width = bar.get_width()
+            ax.text(
+                width + (-0.01 if width > 0 else +0.01),  # petit décalage selon le signe
+                bar.get_y() + bar.get_height() / 2,
+                f"{width:.3f}",
+                va='center',
+                ha='left' if width > 0 else 'right',
+                color='black',
+                fontsize=9,
+                fontweight='bold'
+            )
+
         #ax.set_xlabel("Valeur SHAP")
-        #ax.set_title("Importance des features pour la classe Décès")
-        #ax.invert_yaxis()  # Mettre la feature la plus importante en haut
-        #st.pyplot(fig)
+        #ax.set_title("Importance des variables pour la classe 'Décès'")
+        ax.axvline(0, color='black', linewidth=0.8)
+        ax.invert_yaxis()  # Mettre la plus importante en haut
+        st.pyplot(fig)
 
         # -----------------------
         # 8️⃣ Graphique Waterfall (vue détaillée)
-        st.subheader("📊 Interprétation du modèle (valeurs SHAP)")
+        st.markdown(
+            """
+            <h3 style='text-align: center; color: black;'>
+                Interprétation du détail des contributions des variables
+            </h3>
+            """,
+            unsafe_allow_html=True
+        )
         shap_explanation = shap.Explanation(
             values=shap_class1,
             base_values=explainer.expected_value[1],
