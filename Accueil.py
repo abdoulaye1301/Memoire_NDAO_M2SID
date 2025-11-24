@@ -31,7 +31,7 @@ f"""
 <style>
 [data-testid="stAppViewContainer"] {{
     background-image: url("data:image/jpg;base64,{arrier_plan}");
-    background-size: 4000px*2251px;
+    background-size: 981px*600px;
 }}
 [data-testid="stSidebar"] > div:first-child {{
     background-image: url("data:image/jpg;base64,{carac}");
