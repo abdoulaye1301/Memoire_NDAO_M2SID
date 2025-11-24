@@ -36,8 +36,7 @@ f"""
 [data-testid="stSidebar"] > div:first-child {{
     background-image: url("data:image/jpg;base64,{arrier_plan}");
     background-position: center;
-    background-size: 375px 602px;
-    background-repeat: no-repeat;
+    background-size: 183px 275px;
 }}
 </style>
 """,
