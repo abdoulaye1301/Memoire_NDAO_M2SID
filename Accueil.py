@@ -72,7 +72,7 @@ def main():
     #)
     st.markdown(
     """
-    <h1 style='text-align: center; color: blue;'>
+    <h1 style='text-align: center; color: black;'>
         Prédiction de la survie des patients atteints de cancer de l'estomac
     </h1>
     """,
