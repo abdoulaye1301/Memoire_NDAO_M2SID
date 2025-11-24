@@ -37,7 +37,6 @@ f"""
     background-image: url("data:image/jpg;base64,{arrier_plan}");
     background-position: center;
     background-size: cover;
-    background-repeat: no-repeat;
 }}
 </style>
 """,
