@@ -25,12 +25,12 @@ def add_bg_from_local(image_file):
     return encoded_string
 carac=add_bg_from_local("so-615aff8466a4bdd504491f92-ph0.jpg")
 arrier_plan=add_bg_from_local("clinique42_cancerestomac_endoscopie.jpg")
-
+#background-image: url("data:image/jpg;base64,{arrier_plan}");
 st.markdown(
 f"""
 <style>
 [data-testid="stAppViewContainer"] {{
-    background-image: url("data:image/jpg;base64,{arrier_plan}");
+    background-color: #FFFFFF;
     background-size: cover;
 }}
 [data-testid="stSidebar"] > div:first-child {{
