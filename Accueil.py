@@ -30,11 +30,11 @@ st.markdown(
 f"""
 <style>
 [data-testid="stAppViewContainer"] {{
-    background-image: url("data:image/jpg;base64,{arrier_plan}");
+    background-color: #FFFFFF;
     background-size: cover;
 }}
 [data-testid="stSidebar"] > div:first-child {{
-    background-image: url("data:image/jpg;base64,{carac}");
+    background-image: url("data:image/jpg;base64,{arrier_plan}");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
