@@ -39,14 +39,77 @@ background-color: #4DAAB4;
     background-position: center;
     background-size: cover;
 }}
-[data-testid="stMenu"] {{
-background-color: #FFFFFF;
-    background-size: cover;
+/* On masque le vrai header Streamlit */
+header[data-testid="stHeader"] {{
+    visibility: hidden;
+    height: 0px !important;
 }}
+
+/* On force la SIDEBAR derrière */
+[data-testid="stSidebar"] {{
+    position: relative !important;
+    z-index: 1 !important;
+}}
+
+/* On force le CONTENU derrière le header */
+[data-testid="stAppViewContainer"] {{
+    position: relative !important;
+    z-index: 2 !important;
+}}
+
+/* >>>> FAUX HEADER FIXE TOUT EN HAUT <<<< */
+.fake-header {{
+    width: 100%;
+    height: 60px;
+    background: white;
+    border-bottom: 3px solid #4CAF50;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999999 !important;      /* ULTRA PRIORITAIRE */
+}}
+
+/* Logo */
+.fake-header img {{
+    width: 80px;
+    height: 50px;
+    margin-right: 15px;
+}}
+
+/* Animation texte */
+.fake-header span {{
+    font-size: 28px;
+    color: #4DAAB4;
+    font-weight: bold;
+    animation: slideIn 10s infinite alternate;
+}}
+
+@keyframes slideIn {{
+    0% {{ opacity: 1; transform: translateX(0px); }}
+    100% {{ opacity: 1; transform: translateX(20px); }}
+}}
+
+/* Décale le contenu sous le header */
+.page-offset {{
+    margin-top: 5px;
+}}
+
 </style>
+
+<div class="fake-header">
+    <img src="https://e7.pngegg.com/pngimages/570/53/png-clipart-health-care-medicine-health-professional-health-symbol-leaf-text.png">
+    <span>Application de Prédiction de la survie des patients atteints de cancer de l'estomac</span>
+</div>
+
+<div class="page-offset"></div>
 """,
 unsafe_allow_html=True
 )
+# ========= CONTENU QUI VA DANS LE HEADER =========
+
 
 @st.cache_data
 def chargement():
@@ -70,21 +133,6 @@ def main():
         'Adénopathies', 'Ulcère gastrique', 'Aspect Infiltrant', 
         'Cardiopathie', 'Cardiopathie 1'
     ]
-    #st.title(
-     #   "Prédiction de la survie des patients atteints de cancer de l'estomac",
-      #  anchor="center"
-    #)
-    st.markdown(
-    """
-    <h1 style='text-align: center; color: black;'>
-        Prédiction de la survie des patients atteints de cancer de l'estomac
-    </h1>
-    """,
-    unsafe_allow_html=True
-    )
-
-    st.text("   ")
-    st.text("   ")
     try:
         # Chargement du modèle SVC
         modele = joblib.load("modele_svm.pkl")
