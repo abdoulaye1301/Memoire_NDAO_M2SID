@@ -133,17 +133,22 @@ st.markdown("""
 st.markdown("""
 <style>
 
-/* Masquer le menu flottant Streamlit Cloud (Manage app, Deploy, etc.) */
-[data-testid="stAppStatusWidget"] {
+/* Masquer la barre flottante en bas à droite (Manage app) */
+[data-testid="stFloatingToolbar"] {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
 }
 
-[data-testid="stStatusWidget"] {
+/* Anciennes versions du bouton / fallback */
+[data-testid="stToolbar"] {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
 }
 
-/* Masquer le conteneur flottant en bas à droite */
-.stAppDeployButton, [data-testid="stDeployButton"] {
+/* Conteneur de la bulle noire */
+.stActionButton, .stAppDeployButton {
     display: none !important;
 }
 
