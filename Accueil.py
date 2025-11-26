@@ -130,6 +130,20 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
+st.markdown("""
+<style>
+/* Masquer la barre noire "Manage app" */
+[data-testid="stStatusWidget"] {
+    display: none !important;
+}
+
+/* Masquer la barre entière qui contient le bouton */
+header [data-testid="stToolbar"] {
+    display: none !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
 
 
 @st.cache_data
