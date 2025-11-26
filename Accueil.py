@@ -108,7 +108,28 @@ header[data-testid="stHeader"] {{
 """,
 unsafe_allow_html=True
 )
-# ========= CONTENU QUI VA DANS LE HEADER =========
+st.markdown("""
+    <style>
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding: 5px;
+        background-color: #4DAAB4;   /* Couleur fond footer */
+        color: white;                 /* Couleur texte */
+        font-size: 15px;
+        border-top: 2px solid #4CAF50;
+        z-index: 100;
+    }
+    </style>
+
+    <div class="footer">
+        © 2025 — Application de Prédiction | Développée par NDAO
+    </div>
+""", unsafe_allow_html=True)
+
 
 
 @st.cache_data
