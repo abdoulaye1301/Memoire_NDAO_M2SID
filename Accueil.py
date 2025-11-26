@@ -27,6 +27,27 @@ carac=add_bg_from_local("so-615aff8466a4bdd504491f92-ph0.jpg")
 arrier_plan=add_bg_from_local("clinique42_cancerestomac_endoscopie.jpg")
 #background-image: url("data:image/jpg;base64,{arrier_plan}");
 #background-image: url("data:image/jpg;base64,{carac}");
+st.markdown("""
+<style>
+
+[data-testid="stSidebar"] {
+    position: fixed !important;     /* nécessaire pour scroller */
+    top: 60px;                      /* pour éviter de passer sous ton faux header */
+    left: 0;
+    height: calc(100vh - 60px) !important;   /* hauteur ajustée */
+    overflow-y: auto !important;    /* <<< ACTIVE LE SCROLL */
+    overflow-x: hidden !important;
+}
+
+/* Fix pour le conteneur interne */
+[data-testid="stSidebar"] > div:first-child {
+    height: auto !important;
+    overflow-y: visible !important;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
 st.markdown(
 f"""
 <style>
@@ -34,16 +55,17 @@ f"""
     background-image: url("data:image/jpg;base64,{arrier_plan}");
     background-size: 981px*600px;
 }}
-[data-testid="stSidebar"] > div:first-child {{
-background-color: #4DAAB4;
-    background-position: center;
-    background-size: cover;
-}}
 /* On masque le vrai header Streamlit */
 header[data-testid="stHeader"] {{
     visibility: hidden;
     height: 0px !important;
 }}
+[data-testid="stSidebar"] > div:first-child {{
+background-color: #4DAAB4;
+    background-position: center;
+    background-size: cover;
+}}
+
 
 /* On force la SIDEBAR derrière */
 [data-testid="stSidebar"] {{
@@ -116,7 +138,7 @@ st.markdown("""
         bottom: 0;
         width: 100%;
         text-align: center;
-        padding: 5px;
+        padding: 2px;
         background-color: #4DAAB4;   /* Couleur fond footer */
         color: white;                 /* Couleur texte */
         font-size: 15px;
@@ -126,34 +148,10 @@ st.markdown("""
     </style>
 
     <div class="footer">
-        © 2025 — Application de Prédiction | Développée par NDAO
+        © 2025 NDAO — Tous droits réservés
     </div>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-<style>
-
-/* Masquer la barre flottante en bas à droite (Manage app) */
-[data-testid="stFloatingToolbar"] {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-}
-
-/* Anciennes versions du bouton / fallback */
-[data-testid="stToolbar"] {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-}
-
-/* Conteneur de la bulle noire */
-.stActionButton, .stAppDeployButton {
-    display: none !important;
-}
-
-</style>
-""", unsafe_allow_html=True)
 
 
 
