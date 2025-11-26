@@ -132,17 +132,24 @@ st.markdown("""
 
 st.markdown("""
 <style>
-/* Masquer la barre noire "Manage app" */
+
+/* Masquer le menu flottant Streamlit Cloud (Manage app, Deploy, etc.) */
+[data-testid="stAppStatusWidget"] {
+    display: none !important;
+}
+
 [data-testid="stStatusWidget"] {
     display: none !important;
 }
 
-/* Masquer la barre entière qui contient le bouton */
-header [data-testid="stToolbar"] {
+/* Masquer le conteneur flottant en bas à droite */
+.stAppDeployButton, [data-testid="stDeployButton"] {
     display: none !important;
 }
+
 </style>
 """, unsafe_allow_html=True)
+
 
 
 
