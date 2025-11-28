@@ -203,7 +203,7 @@ def main():
     # --------------------------------------------------------
     choix = st.sidebar.selectbox("**NAVIGATION** :", ["🆕 Nouveau Patient", "📂 Patient existant"])
     colonnes=st.sidebar.columns(2)
-    colonnes[1].subheader("🧩  **du patient**")
+    colonnes[1].subheader("**du patient**")
     colonnes[0].subheader("**Caractéristiques**")
     
     if choix== "📂 Patient existant":
