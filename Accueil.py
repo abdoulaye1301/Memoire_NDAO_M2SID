@@ -106,7 +106,7 @@ background-color: #4DAAB4;
     font-size: 28px;
     color: #4DAAB4;
     font-weight: bold;
-    animation: slideIn 10s infinite alternate;
+    animation: slideIn 4s infinite alternate;
 }}
 
 @keyframes slideIn {{
@@ -148,7 +148,7 @@ st.markdown("""
     </style>
 
     <div class="footer">
-        © 2025 NDAO — Tous droits réservés
+        copyright © 2025 NDAO
     </div>
 """, unsafe_allow_html=True)
 
