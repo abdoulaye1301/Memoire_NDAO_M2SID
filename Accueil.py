@@ -426,7 +426,7 @@ def main():
         st.markdown(
             """
             <h3 style='text-align: center; color: black;'>
-                Importance des variables selon les valeurs SHAP
+                Contribition des variables sur la prédiction du modele avcec les valeurs SHAP
             </h3>
             """,
             unsafe_allow_html=True
@@ -460,15 +460,15 @@ def main():
 
         # -----------------------
         # 8️⃣ Graphique Waterfall (vue détaillée)
-        st.markdown(
-            """
-            <h3 style='text-align: center; color: black;'>
-                Interprétation du détail des contributions des variables
-            </h3>
-            """,
-            unsafe_allow_html=True
-        )
-        shap_explanation = shap.Explanation(
+        #st.markdown(
+         #   """
+          #  <h3 style='text-align: center; color: black;'>
+           #     Interprétation du détail des contributions des variables
+            #</h3>
+            #""",
+            #unsafe_allow_html=True
+        #)
+        """shap_explanation = shap.Explanation(
             values=shap_class1,
             base_values=explainer.expected_value[1],
             data=data_to_explain.values[0],
@@ -477,7 +477,7 @@ def main():
         fig_wf = plt.figure(figsize=(10, 6))
         shap.plots.waterfall(shap_explanation, show=False)
         st.pyplot(fig_wf)
-            
+            """
 
     except Exception as e:
         st.error(f"Erreur lors de la prédiction ou du calcul SHAP : {e}")
