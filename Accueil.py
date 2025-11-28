@@ -468,16 +468,16 @@ def main():
             #""",
             #unsafe_allow_html=True
         #)
-        """shap_explanation = shap.Explanation(
-            values=shap_class1,
-            base_values=explainer.expected_value[1],
-            data=data_to_explain.values[0],
-            feature_names=feature_names
-        )
-        fig_wf = plt.figure(figsize=(10, 6))
-        shap.plots.waterfall(shap_explanation, show=False)
-        st.pyplot(fig_wf)
-            """
+        #shap_explanation = shap.Explanation(
+         #   values=shap_class1,
+         #   base_values=explainer.expected_value[1],
+          #  data=data_to_explain.values[0],
+           # feature_names=feature_names
+        #)
+        #fig_wf = plt.figure(figsize=(10, 6))
+        #shap.plots.waterfall(shap_explanation, show=False)
+        #st.pyplot(fig_wf)
+            
 
     except Exception as e:
         st.error(f"Erreur lors de la prédiction ou du calcul SHAP : {e}")
